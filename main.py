@@ -1,6 +1,13 @@
-def main():
-    print("Hello from rekordbox-mcp-python!")
+import asyncio
+from rekordbox_mcp.database import RekordboxDatabase
 
+async def main():
+    db = RekordboxDatabase()
 
-if __name__ == "__main__":
-    main()
+    await db.connect()
+
+    count = await db.get_track_count()
+    
+    print(f"Tracks: {count}")
+
+asyncio.run(main())
